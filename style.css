@@ -1,0 +1,171 @@
+body {
+   background-color: #eef2ff;
+}
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+   visibility: hidden; /* Hidden by default. Visible on click */
+   min-width: 250px; /* Set a default minimum width */
+   margin-left: -125px; /* Divide value of min-width by 2 */
+   background-color: #333; /* Black background color */
+   color: #fff; /* White text color */
+   text-align: center; /* Centered text */
+   border-radius: 2px; /* Rounded borders */
+   padding: 16px; /* Padding */
+   position: fixed; /* Sit on top of the screen */
+   z-index: 1; /* Add a z-index if needed */
+   left: 50%; /* Center the snackbar */
+   bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+   visibility: visible; /* Show the snackbar */
+
+   /* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
+   However, delay the fade out process for 2.5 seconds */
+   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+   animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#snackbar.showlong {
+   visibility: visible; /* Show the snackbar */
+
+   /* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
+   However, delay the fade out process for 2.5 seconds */
+   -webkit-animation: fadein 0.5s, fadeout 0.5s 5s;
+   animation: fadein 0.5s, fadeout 0.5s 5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+   from {bottom: 0; opacity: 0;} 
+   to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+   from {bottom: 0; opacity: 0;}
+   to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+   from {bottom: 30px; opacity: 1;} 
+   to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+   from {bottom: 30px; opacity: 1;}
+   to {bottom: 0; opacity: 0;}
+} 
+
+/* The Modal (background) */
+.modal {
+   display: none; /* Hidden by default */
+   position: fixed; /* Stay in place */
+   z-index: 1; /* Sit on top */
+   left: 0;
+   top: 0;
+   width: 100%; /* Full width */
+   height: 100%; /* Full height */
+   overflow: auto; /* Enable scroll if needed */
+   background-color: rgb(0,0,0); /* Fallback color */
+   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+   background-color: #D5D9EF;
+   margin: 15% auto; /* 15% from the top and centered */
+   padding: 20px;
+   border: 1px solid #888;
+   width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.modalclose {
+   color: #aaa;
+   float: right;
+   font-size: 28px;
+   font-weight: bold;
+}
+
+.modalclose:hover,
+.modalclose:focus {
+   color: black;
+   text-decoration: none;
+   cursor: pointer;
+}
+
+.loadingtx {
+   visibility: hidden; /* Show the snackbar */
+   border: 16px solid #f3f3f3; /* Light grey */
+   border-top: 16px solid #3498db; /* Blue */
+   border-radius: 50%;
+   width: 80px;
+   height: 80px;
+   z-index: 1; /* Sit on top */
+   animation: spin 2s linear infinite;
+   max-width: 500px;
+   margin: auto;
+}
+
+#loadingtx.show {
+   visibility: visible; /* Show the snackbar */
+   -webkit-animation: fadein 0.5s;
+   animation: fadein 0.5s;
+}
+
+#loadingtx.hide {
+   visibility: hidden; /* Show the snackbar */
+   -webkit-animation: fadeout 0.5s;
+   animation: fadeout 0.5s;
+}
+
+@keyframes spin {
+   0% { transform: rotate(0deg); }
+   100% { transform: rotate(360deg); }
+}
+
+
+.resultsdesc {
+   color: #000;
+}
+
+.resultsdesc em {
+   color: #f00;
+}
+.resultsdesc dubs {
+   padding: 4px;
+   color: #f04;
+   font-weight: bold;
+   background: red; /* For browsers that do not support gradients */
+   background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet); /* For Safari 5.1 to 6.0 */
+   background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet); /* For Opera 11.1 to 12.0 */
+   background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet); /* For Firefox 3.6 to 15 */
+   background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet); /* Standard syntax (must be last) */
+} 
+
+
+.resultsdesc trips {
+   padding: 4px;
+   color: #f04;
+   font-size: 2vw;
+   font-weight: bold;
+   background: red; /* For browsers that do not support gradients */
+   background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet); /* For Safari 5.1 to 6.0 */
+   background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet); /* For Opera 11.1 to 12.0 */
+   background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet); /* For Firefox 3.6 to 15 */
+   background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet); /* Standard syntax (must be last) */
+} 
+
+.resultsdesc quads {
+   padding: 4px;
+   font-size: 3vw;
+   color: #f04;
+   font-weight: bold;
+   background: red; /* For browsers that do not support gradients */
+   background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet); /* For Safari 5.1 to 6.0 */
+   background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet); /* For Opera 11.1 to 12.0 */
+   background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet); /* For Firefox 3.6 to 15 */
+   background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet); /* Standard syntax (must be last) */
+} 
