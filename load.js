@@ -684,16 +684,22 @@ function showSnackbarMessage(message) {
    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 
+/* window.addEventListener('load', function() {
+   var txHash = '0xea10039b5e38da95f98de9504cce2adb7827fdc21f85f32e064ee1a016210087'
+   showSnackbarMessage("Transaction " + txHash + " sent")
+});
+*/
+
 function showLoadingTx() {
    // Get the snackbar DIV
-   var x = document.getElementById("loadingtx");
-   x.className = "show";
+   var x = document.getElementById("load");
+   x.style.display = "block";
 }
 
 function hideLoadingTx() {
    // Get the snackbar DIV
-   var x = document.getElementById("loadingtx");
-   x.className = "hide";
+   var x = document.getElementById("load");
+   x.style.display = "none";
 }
 
 
@@ -767,6 +773,8 @@ function startApp(web3) {
    const rollbutton = document.querySelector('button.rollButton')
    const remText = document.getElementById('remTokensText')
    const ownText = document.getElementById('yourTokensText')
+   const gasText = document.getElementById('currentGasLimitText')
+   const rollsText = document.getElementById('currentRollsText')
 
    function reloadOwnTokens() {
       FourChToken.balanceOf(web3.eth.accounts[0]).then(function (someoutput) {
@@ -790,6 +798,27 @@ function startApp(web3) {
       }).catch(console.error)
    }
 
+   function reloadGasText() {
+      FourChToken.maxRollGasPrice().then(function (someoutput) {
+         if ( typeof someoutput != 'undefined' ) {
+            if ( typeof someoutput[0] != 'undefined' ) {
+               result = BigNumber(someoutput[0]).div('1e9')
+               gasText.innerHTML = 'Current Gas Price Limit: ' + result.toNumber() + ' Gwei'
+            }
+         }
+      }).catch(console.error)
+   }
+
+   function reloadRollsText() {
+      FourChToken.rollsPerCall().then(function (someoutput) {
+         if ( typeof someoutput != 'undefined' ) {
+            if ( typeof someoutput[0] != 'undefined' ) {
+               result = BigNumber(someoutput[0])
+               rollsText.innerHTML = 'Rolls per transaction: ' + result.toNumber()
+            }
+         }
+      }).catch(console.error)
+   }
 
    web3.version.getNetwork((err, netId) => {
       if (err) {
@@ -902,6 +931,8 @@ function startApp(web3) {
 
       reloadOwnTokens()
       reloadRemTokens()
+      reloadGasText()
+      reloadRollsText()
 
       rollbutton.addEventListener('click', function() {
          if (typeof web3.eth.accounts[0] != 'undefined') {

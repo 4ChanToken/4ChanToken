@@ -5,8 +5,9 @@ body {
 /* The snackbar - position it at the bottom and in the middle of the screen */
 #snackbar {
    visibility: hidden; /* Hidden by default. Visible on click */
+   /* visibility: visible; /* Hidden by default. Visible on click */
    min-width: 250px; /* Set a default minimum width */
-   margin-left: -125px; /* Divide value of min-width by 2 */
+   /* margin-left: -125px; /* Divide value of min-width by 2 */
    background-color: #333; /* Black background color */
    color: #fff; /* White text color */
    text-align: center; /* Centered text */
@@ -14,7 +15,7 @@ body {
    padding: 16px; /* Padding */
    position: fixed; /* Sit on top of the screen */
    z-index: 1; /* Add a z-index if needed */
-   left: 50%; /* Center the snackbar */
+   /* left: 50%; /* Center the snackbar */
    bottom: 30px; /* 30px from the bottom */
 }
 
@@ -97,28 +98,17 @@ body {
 }
 
 .loadingtx {
-   visibility: hidden; /* Show the snackbar */
-   border: 16px solid #f3f3f3; /* Light grey */
+   display: none; /* Hidden by default */
+   /* position: fixed; /* Stay in place */
+   z-index: 1; /* Sit on top */
+   border: 16px solid #000; /* Light grey */
    border-top: 16px solid #3498db; /* Blue */
    border-radius: 50%;
-   width: 80px;
-   height: 80px;
-   z-index: 1; /* Sit on top */
+   width: 60px;
+   height: 60px;
    animation: spin 2s linear infinite;
    max-width: 500px;
    margin: auto;
-}
-
-#loadingtx.show {
-   visibility: visible; /* Show the snackbar */
-   -webkit-animation: fadein 0.5s;
-   animation: fadein 0.5s;
-}
-
-#loadingtx.hide {
-   visibility: hidden; /* Show the snackbar */
-   -webkit-animation: fadeout 0.5s;
-   animation: fadeout 0.5s;
 }
 
 @keyframes spin {
@@ -134,33 +124,24 @@ body {
 .resultsdesc em {
    color: #f00;
 }
+
 .resultsdesc dubs {
    padding: 4px;
    color: #f04;
    font-weight: bold;
-   background: red; /* For browsers that do not support gradients */
-   background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet); /* For Safari 5.1 to 6.0 */
-   background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet); /* For Opera 11.1 to 12.0 */
-   background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet); /* For Firefox 3.6 to 15 */
-   background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet); /* Standard syntax (must be last) */
 } 
 
 
 .resultsdesc trips {
    padding: 4px;
-   color: #f04;
-   font-size: 2vw;
+   color: #4ff;
+   font-size: 150%;
    font-weight: bold;
-   background: red; /* For browsers that do not support gradients */
-   background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet); /* For Safari 5.1 to 6.0 */
-   background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet); /* For Opera 11.1 to 12.0 */
-   background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet); /* For Firefox 3.6 to 15 */
-   background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet); /* Standard syntax (must be last) */
 } 
 
 .resultsdesc quads {
    padding: 4px;
-   font-size: 3vw;
+   font-size: 200%;
    color: #f04;
    font-weight: bold;
    background: red; /* For browsers that do not support gradients */
