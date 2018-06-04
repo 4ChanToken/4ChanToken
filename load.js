@@ -621,7 +621,7 @@ var abi =  [
                   "type": "function"
                }
    ];
-const contractAddress = '0xa1204001e7c16f829eab811cb3ca0b13c8040f12'
+const contractAddress = '0xB00FE0f203E31DD0a41bC077ccD001fbd43fb5e5'
 const potAddress = '0x0000000000000000000000000000000000000001'
 const workingNetwork = "4";
 
