@@ -622,9 +622,9 @@ var abi =  [
                   "type": "function"
                }
    ];
-const contractAddress = '0xB00FE0f203E31DD0a41bC077ccD001fbd43fb5e5'
+const contractAddress = '0x66501968FbF6CfB8E7d9Dffe97918D5A90Fa8458'
 const potAddress = '0x0000000000000000000000000000000000000001'
-const workingNetwork = "4";
+const workingNetwork = "1";
 
 var currentMaxDigits = 2;
 var currentBlockLimit = 1;
