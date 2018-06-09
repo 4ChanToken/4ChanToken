@@ -621,9 +621,15 @@ var abi =  [
                   "type": "function"
                }
    ];
-const contractAddress = '0x66501968FbF6CfB8E7d9Dffe97918D5A90Fa8458'
 const potAddress = '0x0000000000000000000000000000000000000001'
-const workingNetwork = "1";
+
+var contractAddress = '0x66501968FbF6CfB8E7d9Dffe97918D5A90Fa8458'
+var workingNetwork = '1'
+
+if (window.name == 'debug') {
+   contractAddress = '0xB00FE0f203E31DD0a41bC077ccD001fbd43fb5e5'
+   workingNetwork = '4'
+}
 
 var currentMaxDigits = 2;
 var currentBlockLimit = 1;
@@ -654,76 +660,24 @@ function countDigitsEnd(txt) {
 function getResultText(length) {
    switch (length) {
       case 2:
-         return 'you got <dubs>dubs</dubs>'
+         return 'you got <dubs class="animated pulse">dubs</dubs>'
       case 3:
-         return 'you got <trips>trips</trips>'
+         return 'you got <trips class="animated bounceIn">trips</trips>'
       case 4:
-         return 'you got <quads>quads</quads>'
+         return 'you got <quads class="animated rotateIn">quads</quads>'
       case 5:
-         return 'you got <quads>quints</quads>'
+         return 'you got <quads class="animated rotateIn">quints</quads>'
       case 6:
-         return 'you got <quads>sexts</quads>'
+         return 'you got <quads class="animated rotateIn">sexts</quads>'
       case 7:
-         return 'you got <quads>septs</quads>'
+         return 'you got <quads class="animated rotateIn">septs</quads>'
       case 8:
-         return 'you got <quads>octs</quads>'
+         return 'you got <quads class="animated rotateIn">octs</quads>'
       case 9:
-         return 'you got <quads>nons</quads>'
+         return 'you got <quads class="animated rotateIn">nons</quads>'
    }
 
    return ''
-}
-
-function showSnackbarMessage(message) {
-   // Get the snackbar DIV
-   var x = document.getElementById("snackbar");
-   x.innerHTML = message
-   // Add the "show" class to DIV
-   x.className = "show";
-   // After 3 seconds, remove the show class from DIV
-   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-}
-
-/* window.addEventListener('load', function() {
-   var txHash = '0xea10039b5e38da95f98de9504cce2adb7827fdc21f85f32e064ee1a016210087'
-   showSnackbarMessage("Transaction " + txHash + " sent")
-});
-*/
-
-function showLoadingTx() {
-   // Get the snackbar DIV
-   var x = document.getElementById("load");
-   x.style.display = "block";
-}
-
-function hideLoadingTx() {
-   // Get the snackbar DIV
-   var x = document.getElementById("load");
-   x.style.display = "none";
-}
-
-
-function showModalWithText(txt) {
-   var modal = document.getElementById('myModal');
-   var modalText = document.getElementById("modalText");
-   modalText.innerHTML = txt;
-   modal.style.display = "block";
-}
-
-var span = document.getElementsByClassName("close");
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-   var modal = document.getElementById('myModal');
-   modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-   var modal = document.getElementById('myModal');
-   if (event.target == modal) {
-      modal.style.display = "none";
-   }
 }
 
 function getNetworkName(netId) {
@@ -772,7 +726,8 @@ function startApp(web3) {
 
    const rollbutton = document.querySelector('button.rollButton')
    const remText = document.getElementById('remTokensText')
-   const ownText = document.getElementById('yourTokensText')
+   const remTokensNum = document.getElementById('remTokensNum')
+   const ownTokensNum = document.getElementById('tokensNum')
    const gasText = document.getElementById('currentGasLimitText')
    const rollsText = document.getElementById('currentRollsText')
 
@@ -781,7 +736,9 @@ function startApp(web3) {
          if ( typeof someoutput != 'undefined' ) {
             if ( typeof someoutput[0] != 'undefined' ) {
                result = BigNumber(someoutput[0]).div('1e18')
-               ownText.innerHTML = 'Your tokens: ' + result.toNumber()
+               ownTokensNum.innerHTML = result.toNumber()
+               ownTokensNum.href = currentNetwork.etherscan + 'token/' + contractAddress +
+                        '?a=' + web3.eth.accounts[0] 
             }
          }
       }).catch(console.error)
@@ -792,7 +749,9 @@ function startApp(web3) {
          if ( typeof someoutput != 'undefined' ) {
             if ( typeof someoutput[0] != 'undefined' ) {
                result = BigNumber(someoutput[0]).div('1e18')
-               remText.innerHTML = 'Remaining tokens to distribute: ' + result.toNumber()
+               remTokensNum.innerHTML = result.toNumber()
+               remTokensNum.href = currentNetwork.etherscan + 'token/' + contractAddress +
+                        '?a=' + potAddress
             }
          }
       }).catch(console.error)
@@ -836,9 +795,16 @@ function startApp(web3) {
 
       
       if (netId != workingNetwork) {
-         console.log('Error: You need to be logged to ' + getNetworkName(workingNetwork).name +
+         window.showModalWithText('Metamask Error!',
+            'You need to be logged to ' + getNetworkName(parseInt(workingNetwork)).name +
+                      ' to run this contract. You are currently connected to ' + 
+                      getNetworkName(parseInt(netId)).name, 'error')
+
+         console.log('Error: You need to be logged to ' + getNetworkName(parseInt(workingNetwork)).name +
                       ' to run this contract. You are currently connected to ' + 
                       getNetworkName(netId).name)
+         const rollbutton = document.querySelector('button.rollButton')
+         rollbutton.disabled = true;
          return
       }
 
@@ -880,9 +846,9 @@ function startApp(web3) {
             outputText += "<br>"
          }
          if ( txReceipt.logs.length > 1 ) {
-            outputText += "Total tokens: " + totalTokens
+            outputText += "<br>Total tokens: " + totalTokens
          }
-         showModalWithText(outputText);
+         window.showModalWithText('Roll Complete!', outputText, result);
       }
 
       async function waitForTxToBeMined (txHash) {
@@ -895,6 +861,7 @@ function startApp(web3) {
                error = err
             }
          }
+         window.hideModal()
          if (!error) {
             showSnackbarMessage("Transaction " + txHash + " mined!")
             logRollResults(txReceipt)
@@ -908,7 +875,6 @@ function startApp(web3) {
             } , 1000 * secondsPerBlock * (currentBlockLimit - 1) );
          }
          reloadRemTokens()
-         hideLoadingTx()
       }
 
       FourChToken.rollMaxDigits().then(function (someoutput) {
@@ -942,7 +908,13 @@ function startApp(web3) {
                   console.log('Transaction sent')
                   console.dir(txHash)
                   showSnackbarMessage("Transaction " + txHash + " sent")
-                  showLoadingTx()
+                  window.showModalWithText('Wait for transaction to be mined',
+                                    'Transaction is now being mined by the ethereum network.<br>' + 
+                                    'Once the transaction is mined you will receive your tokens.<br>' +
+                                    'You can track its progress in <a href="' + 
+                                    currentNetwork.etherscan + 'tx/' + txHash
+                                    + '" target="_blank">etherscan</a>',
+                                    'loading')
                   waitForTxToBeMined(txHash)
                })
                .catch(console.error)
@@ -970,11 +942,16 @@ var loadEventFunction = function() {
       // Warn the user that they need to get a web3 browser
       // Or install MetaMask, maybe with a nice graphic.
       console.log('No web3? You should consider trying MetaMask!');
+
       window.dispatchEvent(metamaskloadevent);
+      window.showModalWithText('Oh no!',
+         'You don\'t have a Web3 enabled browser which is required to use this page.<br>' + 
+         'Please head over to <a href="https://metamask.io/" target="_blank">https://metamask.io/</a> to ' +
+         'download Metamask!', 'error')
+      const rollbutton = document.querySelector('button.rollButton')
+      rollbutton.disabled = true;
    }
 };
-
-console.log('Adding event listener')
 
 window.addEventListener('load', loadEventFunction);
 

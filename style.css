@@ -2,6 +2,50 @@ body {
    background-color: #eef2ff;
 }
 
+.rollButton {
+    background-color: #1863BE;
+    border: black;
+    color: white;
+    padding: 20px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4px;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.rollButton:hover {
+   background-color: #2188ff;
+}
+
+.roundButton {
+    background-color: #1863BE;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20%;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+button:disabled,
+button[disabled] {
+    background: #dddddd;
+}
+
+.topright {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-size: 18px;
+}
+
+
 /* The snackbar - position it at the bottom and in the middle of the screen */
 #snackbar {
    visibility: hidden; /* Hidden by default. Visible on click */
@@ -70,7 +114,7 @@ body {
    height: 100%; /* Full height */
    overflow: auto; /* Enable scroll if needed */
    background-color: rgb(0,0,0); /* Fallback color */
-   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+   background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
