@@ -816,7 +816,7 @@ function startApp(web3) {
       var a = document.getElementById('contractText')
       a.href = currentNetwork.etherscan + 'address/' + contractAddress
       a = document.getElementById('tradeText')
-      a.href = 'https://etherdelta.com/#' + contractAddress + '-ETH'
+      a.href = 'https://forkdelta.github.io/#!/trade/' + contractAddress + '-ETH'
 
       function logRollResults(txReceipt) {
          var logs = txReceipt.logs
