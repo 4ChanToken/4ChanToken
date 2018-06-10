@@ -1,85 +1,101 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<link rel="stylesheet" href="style.css">
-   <link rel="stylesheet" href="animate.css">
+	<head>
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="animate.css">
 
-   <script type="text/javascript">
-      var metamask_enabled = false;
-   </script>
+		<script type="text/javascript">
+			var metamask_enabled = false;
+		</script>
 
-   <script src="visual.js"></script>
+		<script src="visual.js"></script>
 
-   <script src="loadbundle.js"></script>
+		<script src="loadbundle.js"></script>
 
-</head>
-<body>
-   <center>
-   <h1 id="title">4ChanToken</h1>
+	</head>
+	<body>
+		<center>
+			<h1 id="title">4ChanToken</h1>
 
-   <button class="rollButton">Roll</button>
+			<button class="rollButton">Roll</button>
 
-   <h3 id="yourTokensText">Your tokens: <a id="tokensNum" target = "_blank">?</a></h3>
+			<h3 id="yourTokensText">Your tokens: <a id="tokensNum" target = "_blank">?</a></h3>
 
-   <h3 id="remTokensText">Remaining tokens to distribute: <a id="remTokensNum" target = "_blank">?</a></h3>
+			<h3 id="remTokensText">Remaining tokens to distribute: <a id="remTokensNum" target = "_blank">?</a></h3>
 
-	<p id="currentGasLimitText">Current Gas Price Limit: 0</p>
+			<p id="currentGasLimitText">Current Gas Price Limit: 0</p>
 
-	<p id="currentRollsText">Rolls per transaction: 1</p>
-   
-	<a id="contractText">See contract on etherscan.io</a>
+			<p id="currentRollsText">Rolls per transaction: 1</p>
 
-	<a id="tradeText">Trade on forkdelta</a>
+			<a id="contractText">See contract on etherscan.io</a>
 
-   </center>
+			<a id="tradeText">Trade on forkdelta</a>
 
-   <div id="snackbar">Some text some message..</div>
+			<!--
+			<div class="rollstablediv" style="overflow-x:auto;">
+			<h3>Top Recent Rolls</h3>
+			<table id="customers">
+				<tr>
+					<th>Address</th>
+					<th>Roll</th>
+					<th>Tokens</th>
+				</tr>
+				<tr>
+					<td>0x10971429c3c810c597b04f58b4289ff1e3050b6f</td>
+					<td>90589</td>
+					<td>9</td>
+				</tr>
+				<tr>
+					<td>0x266dc8fb9d7767484b8ea79dfe5a24cf4ed638f6</td>
+					<td>84604</td>
+					<td>4</td>
+				</tr>
+				<tr>
+					<td>0x266dc8fb9d7767484b8ea79dfe5a24cf4ed638f6</td>
+					<td>24577 (Dubs)</td>
+					<td>77</td>
+				</tr>
+			</table>
+			</div>
+			-->
 
-   <!--  <button class="roundButton topright" href="#aboutModalContent">?</button> -->
+		</center>
+
+		<div id="snackbar">Some text some message..</div>
+
+		<button class="rollButton roundButton topright" onclick="window.showHelpModal()">?</button>
 
 
-	<!-- Info Modal -->
-	<div id="infoModal" class="modal">
+		<!-- Info Modal -->
+		<div id="infoModal" class="modal">
 
-		<!-- Info content -->
-		<div id="infoModalContent" class="modal-content animated fadeInUp">
-			<span class="modalclose" onclick="window.hideModal();">&times;</span>
-         <center>
-			<h3 id="modalTitle">Some text in the Modal..</h3>
-         <div id="load" class="loadingtx"></div>
-			<p id="modalText" class="resultsdesc"></p>
-         </center>
+			<!-- Info content -->
+			<div id="infoModalContent" class="modal-content animated fadeInUp">
+				<span class="modalclose" onclick="window.hideModal();">&times;</span>
+				<center>
+					<h3 id="modalTitle">Some text in the Modal..</h3>
+					<div id="load" class="loadingtx"></div>
+					<p id="modalText" class="resultsdesc"></p>
+				</center>
+			</div>
+
 		</div>
 
-	</div>
 
-	<!-- About Modal -->
-	<div id="aboutModal" class="modal">
-		<!-- Info content -->
-		<div id="aboutModalContent" class="modal-content animated fadeInUp">
-			<span class="modalclose" onclick="window.hideModal();">&times;</span>
-         <center>
-			<h3 id="aboutmodalTitle">Some text in the Modal..</h3>
-			<p id="aboutmodalText" class="resultsdesc"></p>
-         </center>
-		</div>
+		<script type="text/javascript">
+			var span = document.getElementsByClassName("close");
+span.onclick = function() {
+	var modal = document.getElementById('infoModal');
+	modal.style.display = "none";
+}
+		</script>
 
-	</div>
-
-   <script type="text/javascript">
-      var span = document.getElementsByClassName("close");
-      span.onclick = function() {
-         var modal = document.getElementById('infoModal');
-         modal.style.display = "none";
-      }
-   </script>
-
-   <script type="text/javascript">
-      if (window.name == 'debug') {
-         // showModalWithText('example title', 'example text', 'error')
-      }
-   </script>
+		<script type="text/javascript">
+			if (window.name == 'debug') {
+				// showModalWithText('example title', 'example text', 'error')
+			}
+		</script>
 
 
-</body>
+	</body>
 </html>

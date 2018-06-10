@@ -732,6 +732,35 @@ function startApp(web3) {
    const gasText = document.getElementById('currentGasLimitText')
    const rollsText = document.getElementById('currentRollsText')
 
+   function parseRolls(error, events) {
+      if ( typeof events != 'undefined' ) {
+         console.log(events);
+         /*
+         for (i=0; i<events.length; i++) {
+            var eventObj = events[i];
+            console.log('Address: ' + eventObj.returnValues._from);
+            console.log('Result: ' + parseLogDataOutput(eventObj.data));
+         }
+         */
+      }
+   }
+
+   function getLastRolls() {
+      const rolledEv = FourChToken.Rolled();
+      rolledEv.new({from: web3.eth.accounts[0]});
+
+      /* rolledEv.filter({fromBlock: 2434218}, parseRolls); */
+      console.log(rolledEv);
+      /*
+      FourChToken.Rolled({}, {
+               filter: {_from: web3.eth.accounts[0]},
+               fromBlock: 0,
+               }).get( parseRolls);
+               */
+   }
+
+   /* getLastRolls(); */
+
    function reloadOwnTokens() {
       FourChToken.balanceOf(web3.eth.accounts[0]).then(function (someoutput) {
          if ( typeof someoutput != 'undefined' ) {

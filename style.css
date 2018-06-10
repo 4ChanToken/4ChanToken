@@ -1,9 +1,17 @@
+html {
+   height: 100%;
+}
+
 body {
-   background-color: #eef2ff;
+   height: 100%;
+   margin: 0;
+   background: linear-gradient(#c6ccec, #eceef9);
+   background-repeat: no-repeat;
+   background-attachment: fixed;
 }
 
 .rollButton {
-    background-color: #1863BE;
+    background-color: #667dff;
     border: black;
     color: white;
     padding: 20px 40px;
@@ -17,21 +25,16 @@ body {
 }
 
 .rollButton:hover {
-   background-color: #2188ff;
+   background-color: #99a8ff;
 }
 
 .roundButton {
-    background-color: #1863BE;
-    color: black;
-    text-align: center;
-    text-decoration: none;
     display: inline-block;
     padding: 5px 10px;
-    border-radius: 20%;
+    border-radius: 50%;
     font-size: 16px;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
 }
+
 
 button:disabled,
 button[disabled] {
@@ -44,6 +47,34 @@ button[disabled] {
     right: 16px;
     font-size: 18px;
 }
+
+.rollstablediv {
+   padding: 35px;
+}
+
+table {
+   width: 100%;
+}
+
+table, th, td {
+   /* border: 1px solid black; */
+   text-align: center;
+}
+
+th,td {
+   padding: 15px;
+   border-bottom: 1px solid #ddd;
+}
+
+th {
+   height: 30px;
+   background-color: #667dff;
+   color: white;
+}
+
+tr:nth-child(even) {background-color: #d8dcf3;}
+
+tr:hover {background-color: #eeeff7;}
 
 
 /* The snackbar - position it at the bottom and in the middle of the screen */
@@ -123,7 +154,9 @@ button[disabled] {
    margin: 15% auto; /* 15% from the top and centered */
    padding: 20px;
    border: 1px solid #888;
+   border-radius: 25px;
    width: 80%; /* Could be more or less, depending on screen size */
+   overflow-y:auto;
 }
 
 /* The Close Button */
