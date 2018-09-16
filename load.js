@@ -713,6 +713,8 @@ function parseLogDataOutput(logData) {
    return {'arg1':arg1, 'arg2':arg2}
 }
 
+let pendingTnx = []
+
 function startApp(web3) {
 
    console.log('Starting App');
@@ -880,6 +882,31 @@ function startApp(web3) {
          window.showModalWithText('Roll Complete!', outputText, result);
       }
 
+      function checkPendingTnx(){
+         let currentAddr = web3.eth.accounts[0]
+         let addrTnxs = JSON.parse(localStorage.getItem("4ChToken"))
+         if (addrTnxs !== null){
+            let pendingTnx = addrTnxs.find(function(element)
+            {
+               if (element.addr===currentAddr) return element.tnx
+            });
+            //console.log('data for find is...')
+            if (pendingTnx!=="undefined"){
+               //console.log('checking: '+pendingTnx.tnx)
+               return pendingTnx.tnx;
+            }else{
+               console.log('Not previous tnx in localStorage')
+            }
+         }
+      }
+
+      function deleteSavedTnx(tnx){
+         var deltnx=localStorage.removeItem("4ChToken")
+         if (deltnx!=="undefined"){
+            console.log('removed from localStorage: '+tnx)
+         }
+      }
+
       async function waitForTxToBeMined (txHash) {
          let txReceipt
          let error
@@ -904,6 +931,7 @@ function startApp(web3) {
             } , 1000 * secondsPerBlock * (currentBlockLimit - 1) );
          }
          reloadRemTokens()
+         deleteSavedTnx(txHash)
       }
 
       FourChToken.rollMaxDigits().then(function (someoutput) {
@@ -928,6 +956,13 @@ function startApp(web3) {
       reloadRemTokens()
       reloadGasText()
       reloadRollsText()
+      console.log('Checking if any previous tx');
+      waitfortnx=checkPendingTnx()
+      if (waitfortnx) {
+            console.log('There is waitfortnx data: ')
+            console.log(waitfortnx)
+            waitForTxToBeMined(waitfortnx)
+      }
 
       rollbutton.addEventListener('click', function() {
          if (typeof web3.eth.accounts[0] != 'undefined') {
@@ -944,6 +979,9 @@ function startApp(web3) {
                                     currentNetwork.etherscan + 'tx/' + txHash
                                     + '" target="_blank">etherscan</a>',
                                     'loading')
+                                    pendingTnx.push({addr:web3.eth.accounts[0], tnx:txHash})
+                  console.log('saved on local storage: '+pendingTnx[0].tnx)
+                  localStorage.setItem("4ChToken", JSON.stringify(pendingTnx));
                   waitForTxToBeMined(txHash)
                })
                .catch(console.error)
