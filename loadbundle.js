@@ -965,7 +965,7 @@ var loadEventFunction = function() {
       // You have a web3 browser! Continue below!
       console.log('Got web3js');
       metamask_enabled = true;
-      web3js = new Web3(web3.currentProvider);
+      web3js = new Web3();
       startApp(web3js);
       window.dispatchEvent(metamaskloadevent);
    } else {
